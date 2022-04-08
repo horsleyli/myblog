@@ -28,6 +28,7 @@
             <div class="content">
               <h4 class="title">{{article.title}}</h4>
               <p class="abstract">{{article.desc}}</p>
+              <div v-html="compliedMarkdown"></div>
               <div class="meta">
                 <span>查看 {{article.meta.views}}</span>
                 <span>评论 {{article.meta.comments}}</span>
@@ -64,6 +65,8 @@ import {
   timestampToTime,
 } from "../utils/utils";
 import { ArticlesParams, ArticlesData } from "../types/index";
+import marked from 'marked';
+import t1 from '../articlesmd/test.md';
 
 // 获取可视区域的高度
 const viewHeight = window.innerHeight || document.documentElement.clientHeight;
@@ -111,7 +114,7 @@ export default defineComponent({
       isLoading: false,
       articlesList: [] as Array<any>,
       total: 0,
-      tag_name: decodeURI(getQueryStringByName("tag_name")),
+      //tag_name: decodeURI(getQueryStringByName("tag_name")),
       params: {
         keyword: "",
         likes: "", // 是否是热门文章
@@ -133,12 +136,23 @@ export default defineComponent({
 
     const handleSearch = async (): Promise<void> => {
       state.isLoading = true;
-      const data: ArticlesData = await service.get(
-        urls.getArticleList,
-        {
-          params: state.params,
-        }
-      );
+      // const data: ArticlesData = await service.get(
+      //   urls.getArticleList,
+      //   {
+      //     params: state.params,
+      //   }
+      // );
+
+      const data: ArticlesData = {
+        "count": 1,
+        "list": [{
+            "_id": 1,
+            "title": "cesshi",
+            "desc": "ceshidesc"
+          }]
+      }
+          
+
       state.isLoading = false;
       state.articlesList = [...state.articlesList, ...data.list];
       state.total = data.count;
@@ -154,7 +168,7 @@ export default defineComponent({
     };
 
     const routeChange = (val: any, oldVal: any): void => {
-      state.tag_name = decodeURI(getQueryStringByName("tag_name"));
+      //state.tag_name = decodeURI(getQueryStringByName("tag_name"));
       state.params.tag_id = getQueryStringByName("tag_id");
       state.params.category_id = getQueryStringByName("category_id");
       state.articlesList = [];
@@ -181,6 +195,11 @@ export default defineComponent({
       handleSearch,
       routeChange
     };
+  },
+  computed: {
+   compliedMarkdown () {
+      return marked(t1)
+   }
   }
 });
 </script>
