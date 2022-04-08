@@ -10,7 +10,7 @@
             <router-link to="/">
               <img
                 class="logo"
-                src="../assets/logo.jpg"
+                src="../assets/logodog.jpg"
                 alt="BiaoChenXuYing"
               >
             </router-link>
@@ -65,7 +65,7 @@
             v-else
             :span="4"
           >
-            <div class="nav-right">
+            <!-- <div class="nav-right">
               <el-button
                 size="small"
                 type="primary"
@@ -76,7 +76,7 @@
                 type="danger"
                 @click="handleClick('register')"
               >注册</el-button>
-            </div>
+            </div> -->
           </el-col>
         </el-row>
       </div>
@@ -471,6 +471,7 @@ export default defineComponent({
   }
   .logo {
     height: 50px;
+    width: 70px;
     margin: 0;
     border-radius: 50%;
     margin-top: 5px;
