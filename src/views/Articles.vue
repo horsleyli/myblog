@@ -14,7 +14,7 @@
           :key="article._id"
           class="item"
         >
-          <a
+          <!-- <a
             :href="state.href + article._id"
             target="_blank"
           >
@@ -24,12 +24,14 @@
               data-has-lazy-src="false"
               src="../assets/bg.jpg"
               alt="文章封面"
-            />
+            /> -->
             <div class="content">
-              <h4 class="title">{{article.title}}</h4>
-              <p class="abstract">{{article.desc}}</p>
-              <div v-html="compliedMarkdown"></div>
-              <div class="meta">
+              <!-- <h4 class="title">{{article.title}}</h4>
+              <p class="abstract">{{article.desc}}</p> -->
+              <div><p>1111</p></div>
+              <div v-html="markdown"></div>
+              <div><p>2222</p></div>
+              <!-- <div class="meta">
                 <span>查看 {{article.meta.views}}</span>
                 <span>评论 {{article.meta.comments}}</span>
                 <span>赞 {{article.meta.likes}}</span>
@@ -39,9 +41,9 @@
                 >
                   {{formatTime(article.create_time)}}
                 </span>
-              </div>
+              </div> -->
             </div>
-          </a>
+          <!-- </a> -->
         </li>
       </transition-group>
     </ul>
@@ -65,8 +67,8 @@ import {
   timestampToTime,
 } from "../utils/utils";
 import { ArticlesParams, ArticlesData } from "../types/index";
-import marked from 'marked';
-import t1 from '../articlesmd/test.md';
+import { marked } from 'marked';
+import testMd from '../articlesmd/test.md?raw';
 
 // 获取可视区域的高度
 const viewHeight = window.innerHeight || document.documentElement.clientHeight;
@@ -99,6 +101,11 @@ export default defineComponent({
   components: {
     LoadEnd,
     LoadingCustom,
+  },
+  data() {
+    return {
+      markdown: marked(testMd)
+    }
   },
   watch: {
     $route: {
@@ -177,7 +184,7 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      handleSearch();
+      //handleSearch();
       window.onscroll = () => {
         if (getScrollTop() + getWindowHeight() > getDocumentHeight() - 100) {
           // 如果不是已经没有数据了，都可以继续滚动加载
@@ -195,11 +202,6 @@ export default defineComponent({
       handleSearch,
       routeChange
     };
-  },
-  computed: {
-   compliedMarkdown () {
-      return marked(t1)
-   }
   }
 });
 </script>
