@@ -25,11 +25,11 @@
               src="../assets/bg.jpg"
               alt="文章封面"
             /> -->
-            <div class="content">
+            <div class="content1">
               <!-- <h4 class="title">{{article.title}}</h4>
               <p class="abstract">{{article.desc}}</p> -->
               <div><p>1111</p></div>
-              <div v-html="markdown"></div>
+              <div v-html="markdown" class="mdcss"></div>
               <div><p>2222</p></div>
               <!-- <div class="meta">
                 <span>查看 {{article.meta.views}}</span>
@@ -117,6 +117,7 @@ export default defineComponent({
   },
   setup(props, context) {
     const state = reactive({
+      
       isLoadEnd: false,
       isLoading: false,
       articlesList: [] as Array<any>,
@@ -207,7 +208,8 @@ export default defineComponent({
 </script>
 
 
-<style lang="less" scoped>
+<style lang="less">
+@import '../less/markdown.less';
 .left {
   .articles-list {
     margin: 0;
@@ -220,9 +222,6 @@ export default defineComponent({
       font-size: 18px;
       font-weight: 700;
       line-height: 1.5;
-    }
-    .item > div {
-      padding-right: 140px;
     }
     .item .wrap-img {
       position: absolute;
@@ -243,8 +242,7 @@ export default defineComponent({
       position: relative;
       // width: 100%;
       padding: 15px 0px;
-      padding-right: 150px;
-      border-bottom: 1px solid #f0f0f0;
+      padding-right: 30px;
       word-wrap: break-word;
       cursor: pointer;
       &:hover {
@@ -280,6 +278,9 @@ export default defineComponent({
           color: #666;
         }
       }
+    }
+    ol > li {
+      border-bottom: 1px solid #f0f0f0;
     }
   }
 }
