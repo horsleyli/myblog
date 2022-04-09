@@ -28,9 +28,7 @@
             <div class="content1">
               <!-- <h4 class="title">{{article.title}}</h4>
               <p class="abstract">{{article.desc}}</p> -->
-              <div><p>1111</p></div>
               <div v-html="markdown" class="mdcss"></div>
-              <div><p>2222</p></div>
               <!-- <div class="meta">
                 <span>查看 {{article.meta.views}}</span>
                 <span>评论 {{article.meta.comments}}</span>
@@ -68,7 +66,7 @@ import {
 } from "../utils/utils";
 import { ArticlesParams, ArticlesData } from "../types/index";
 import { marked } from 'marked';
-import testMd from '../articlesmd/test.md?raw';
+import js_20220409 from '../articlesmd/20220409-js.md?raw';
 
 // 获取可视区域的高度
 const viewHeight = window.innerHeight || document.documentElement.clientHeight;
@@ -104,7 +102,7 @@ export default defineComponent({
   },
   data() {
     return {
-      markdown: marked(testMd)
+      markdown: marked(js_20220409)
     }
   },
   watch: {
@@ -186,6 +184,7 @@ export default defineComponent({
 
     onMounted(() => {
       //handleSearch();
+
       window.onscroll = () => {
         if (getScrollTop() + getWindowHeight() > getDocumentHeight() - 100) {
           // 如果不是已经没有数据了，都可以继续滚动加载
@@ -278,9 +277,6 @@ export default defineComponent({
           color: #666;
         }
       }
-    }
-    ol > li {
-      border-bottom: 1px solid #f0f0f0;
     }
   }
 }
