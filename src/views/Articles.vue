@@ -28,7 +28,7 @@
             <div class="content1">
               <!-- <h4 class="title">{{article.title}}</h4>
               <p class="abstract">{{article.desc}}</p> -->
-              <div v-html="js_20220421" class="mdcss"></div>
+              <div v-html="js_20220501" class="mdcss"></div>
               <!-- <div class="meta">
                 <span>查看 {{article.meta.views}}</span>
                 <span>评论 {{article.meta.comments}}</span>
@@ -68,7 +68,7 @@ import { ArticlesParams, ArticlesData } from "../types/index";
 import { marked } from 'marked';
 import js_20220409 from '../articlesmd/20220409-js.md?raw';
 import js_20220421 from '../articlesmd/20220421-js.md?raw';
-
+import js_20220501 from '../articlesmd/20220501-js.md?raw';
 // 获取可视区域的高度
 const viewHeight = window.innerHeight || document.documentElement.clientHeight;
 // 用新的 throttle 包装 scroll 的回调
@@ -105,6 +105,7 @@ export default defineComponent({
     return {
       js_20220409: marked(js_20220409),
       js_20220421: marked(js_20220421),
+      js_20220501: marked(js_20220501),
     }
   },
   watch: {
